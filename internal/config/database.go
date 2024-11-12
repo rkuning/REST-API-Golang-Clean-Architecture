@@ -24,7 +24,10 @@ func NewDatabase(env *Env, log *logrus.Logger) *gorm.DB {
 
 	switch env.DatabaseDriver {
 	case "postgres":
-		dsn := fmt.Sprintf("host=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s", env.DatabaseHost, env.DatabasePassword, env.DatabaseName, env.DatabasePort, env.DatabaseSSLMode, env.DatabaseTimeZone)
+		dsn := fmt.Sprintf(
+			"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
+			env.DatabaseHost, env.DatabaseUsername, env.DatabasePassword, env.DatabaseName, env.DatabasePort, env.DatabaseSSLMode, env.DatabaseTimeZone,
+		)
 
 		config := gorm.Config{
 			Logger: logger.New(&logrusWriter{Logger: log}, logger.Config{

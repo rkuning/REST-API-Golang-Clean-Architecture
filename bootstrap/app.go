@@ -20,7 +20,7 @@ type BootstrapConfig struct {
 	Log      *logrus.Logger
 	Validate *validator.Validate
 	Env      *config.Env
-	Ctx      *context.Context
+	Ctx      context.Context
 	Timeout  time.Duration
 }
 
@@ -38,6 +38,8 @@ func ExecuteApp(env *config.Env, log *logrus.Logger, r *mux.Router) {
 	configureLogger(log)
 
 	server := createServer(env, r)
+
+	fmt.Printf("server running on port %s\n", env.ServerPort)
 
 	if err := server.ListenAndServe(); err != http.ErrServerClosed {
 		log.Fatalf("server failed: %v", err)
