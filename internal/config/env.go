@@ -20,7 +20,7 @@ type Env struct {
 	MaxLifetime      int    `mapstructure:"MAX_LIFETIME"`
 	MaxOpenConns     int    `mapstructure:"MAX_OPEN_CONNS"`
 	MaxIdleConns     int    `mapstructure:"MAX_IDLE_CONNS"`
-	LogLevel         string `mapstructure:"LOG_LEVEL"`
+	LogLevel         int    `mapstructure:"LOG_LEVEL"`
 }
 
 func NewEnv() (*Env, error) {
