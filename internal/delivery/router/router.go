@@ -3,6 +3,7 @@ package router
 import (
 	"net/http"
 	"rest-api-golang-clean-code/internal/config"
+	"rest-api-golang-clean-code/internal/delivery/middleware"
 	"rest-api-golang-clean-code/internal/model"
 	"rest-api-golang-clean-code/internal/util"
 
@@ -17,6 +18,8 @@ type RouterConfig struct {
 }
 
 func (rc *RouterConfig) SetupRouter() {
+	rc.Router.Use(middleware.CorsMiddleware, middleware.ErrorMiddleware(rc.Logger, rc.Env.ContextTimeout))
+
 	rc.Router.HandleFunc("", func(w http.ResponseWriter, r *http.Request) {
 		util.WriteJSON(w, http.StatusOK, model.WebResponse[any]{
 			Code:    http.StatusOK,
