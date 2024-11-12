@@ -23,7 +23,7 @@ func (rc *RouterConfig) SetupRouter() {
 	rc.Router.HandleFunc("", func(w http.ResponseWriter, r *http.Request) {
 		util.WriteJSON(w, http.StatusOK, model.WebResponse[any]{
 			Code:    http.StatusOK,
-			Message: "success",
+			Message: "Base API Golang Clean Architecture",
 		})
 	}).Methods(http.MethodGet).Name("Base Rest API Golang Clean Architecture")
 }
